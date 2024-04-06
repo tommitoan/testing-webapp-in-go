@@ -25,6 +25,7 @@ func Test_application_handlers(t *testing.T) {
 	ts := httptest.NewTLSServer(routes)
 	defer ts.Close()
 
+
 	// range through test data
 	for _, e := range theTests {
 		resp, err := ts.Client().Get(ts.URL + e.url)
@@ -41,7 +42,7 @@ func Test_application_handlers(t *testing.T) {
 
 func TestAppHome(t *testing.T) {
 	var tests = []struct {
-		name         string
+		name string
 		putInSession string
 		expectedHTML string
 	}{
