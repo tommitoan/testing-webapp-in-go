@@ -104,53 +104,51 @@ func addContextAndSessionToRequest(req *http.Request, app application) *http.Req
 	req = req.WithContext(getCtx(req))
 
 	ctx, _ := app.Session.Load(req.Context(), req.Header.Get("X-Session"))
-
 	return req.WithContext(ctx)
 }
 
-
 func Test_app_Login(t *testing.T) {
-	var tests = []struct{
-		name string
-		postedData url.Values
+	var tests = []struct {
+		name               string
+		postedData         url.Values
 		expectedStatusCode int
-		expectedLoc string
+		expectedLoc        string
 	}{
 		{
 			name: "valid login",
 			postedData: url.Values{
-				"email": {"admin@example.com"},
+				"email":    {"admin@example.com"},
 				"password": {"secret"},
 			},
 			expectedStatusCode: http.StatusSeeOther,
-			expectedLoc: "/user/profile",
+			expectedLoc:        "/user/profile",
 		},
 		{
 			name: "missing form data",
 			postedData: url.Values{
-				"email": {""},
+				"email":    {""},
 				"password": {""},
 			},
 			expectedStatusCode: http.StatusSeeOther,
-			expectedLoc: "/",
+			expectedLoc:        "/",
 		},
 		{
 			name: "user not found",
 			postedData: url.Values{
-				"email": {"you@there.com"},
+				"email":    {"you@there.com"},
 				"password": {"password"},
 			},
 			expectedStatusCode: http.StatusSeeOther,
-			expectedLoc: "/",
+			expectedLoc:        "/",
 		},
 		{
 			name: "bad credentials",
 			postedData: url.Values{
-				"email": {"admin@example.com"},
+				"email":    {"admin@example.com"},
 				"password": {"password"},
 			},
 			expectedStatusCode: http.StatusSeeOther,
-			expectedLoc: "/",
+			expectedLoc:        "/",
 		},
 	}
 
