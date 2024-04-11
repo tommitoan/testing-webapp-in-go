@@ -11,7 +11,7 @@ var app application
 
 func TestMain(m *testing.M) {
 	pathToTemplates = "./../../templates/"
-	
+
 	app.Session = getSession()
 	app.DSN = "host=localhost port=5432 user=postgres password=postgres dbname=users sslmode=disable timezone=UTC connect_timeout=5"
 
