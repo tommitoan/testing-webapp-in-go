@@ -1,3 +1,5 @@
+//go:build integration
+
 package dbrepo
 
 import (
@@ -123,10 +125,10 @@ func Test_pingDB(t *testing.T) {
 func TestPostgresDBRepoInsertUser(t *testing.T) {
 	testUser := data.User{
 		FirstName: "Admin",
-		LastName: "User",
-		Email: "admin@example.com",
-		Password: "secret",
-		IsAdmin: 1,
+		LastName:  "User",
+		Email:     "admin@example.com",
+		Password:  "secret",
+		IsAdmin:   1,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -153,10 +155,10 @@ func TestPostgresDBRepoAllUsers(t *testing.T) {
 
 	testUser := data.User{
 		FirstName: "Jack",
-		LastName: "Smith",
-		Email: "jack@smith.com",
-		Password: "secret",
-		IsAdmin: 1,
+		LastName:  "Smith",
+		Email:     "jack@smith.com",
+		Password:  "secret",
+		IsAdmin:   1,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -173,7 +175,7 @@ func TestPostgresDBRepoAllUsers(t *testing.T) {
 	}
 }
 
-func TestPostgresDBRepoGetUser(t *testing.T){
+func TestPostgresDBRepoGetUser(t *testing.T) {
 	user, err := testRepo.GetUser(1)
 	if err != nil {
 		t.Errorf("error getting user by id: %s", err)
@@ -190,7 +192,7 @@ func TestPostgresDBRepoGetUser(t *testing.T){
 
 }
 
-func TestPostgresDBRepoGetUserByEmail(t *testing.T){
+func TestPostgresDBRepoGetUserByEmail(t *testing.T) {
 	user, err := testRepo.GetUserByEmail("jack@smith.com")
 	if err != nil {
 		t.Errorf("error getting user by email: %s", err)
